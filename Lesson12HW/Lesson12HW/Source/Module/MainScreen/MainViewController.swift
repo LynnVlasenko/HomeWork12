@@ -14,8 +14,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupInitialState()
-        model.loadData()
+        setupInitialState() // передаємо усі делегати під час завантаження екрану
+        model.loadData() // витягуємо дані з моделі під час завантаження екрану
     }
     
     private func setupInitialState() {
@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
 extension MainViewController: MainModelDelegate {
     
     func dataDidLoad() {
-        contentView.tableView.reloadData()
+        contentView.tableView.reloadData() // оновлюємо табличку відносно даних з моделі
     }
 }
 

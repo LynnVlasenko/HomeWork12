@@ -15,10 +15,29 @@ class PlaylistDeleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialState()
+        model.loadData()
     }
     
     private func setupInitialState() {
         
         model = PlaylistDeleteModel()
+        model.delegate = self
+        
+        contentView.delegate = self
+        
+        contentView.tableView.dataSource = self
+        contentView.tableView.delegate = self
     }
+}
+
+
+extension PlaylistDeleteViewController: PlaylistDeleteModelDelegate {
+    
+    func dataDidLoad() {
+        contentView.tableView.reloadData()
+    }
+}
+
+extension PlaylistDeleteViewController: PlaylistDeleteViewDelegate {
+    
 }
