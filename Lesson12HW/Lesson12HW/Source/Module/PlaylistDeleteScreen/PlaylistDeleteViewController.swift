@@ -14,6 +14,8 @@ class PlaylistDeleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Task 2"
+        
         setupInitialState()
         model.loadData()
     }

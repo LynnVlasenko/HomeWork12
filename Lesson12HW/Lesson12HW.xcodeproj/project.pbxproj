@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C0F955E2BBD9C8A00A61B69 /* PlaylistDeleteViewController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F955D2BBD9C8A00A61B69 /* PlaylistDeleteViewController+Table.swift */; };
 		6C0F95602BBD9CCB00A61B69 /* MainPlaylistViewController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F955F2BBD9CCA00A61B69 /* MainPlaylistViewController+Table.swift */; };
+		6C8BD2192BBDC19B0028E87B /* PlaylistMoveDeleteViewController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8BD2182BBDC19B0028E87B /* PlaylistMoveDeleteViewController+Table.swift */; };
 		CE4715042BBAC38F00759142 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4715032BBAC38F00759142 /* AppDelegate.swift */; };
 		CE4715062BBAC38F00759142 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4715052BBAC38F00759142 /* SceneDelegate.swift */; };
 		CE47150B2BBAC38F00759142 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4715092BBAC38F00759142 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		6C0F955D2BBD9C8A00A61B69 /* PlaylistDeleteViewController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaylistDeleteViewController+Table.swift"; sourceTree = "<group>"; };
 		6C0F955F2BBD9CCA00A61B69 /* MainPlaylistViewController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainPlaylistViewController+Table.swift"; sourceTree = "<group>"; };
+		6C8BD2182BBDC19B0028E87B /* PlaylistMoveDeleteViewController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaylistMoveDeleteViewController+Table.swift"; sourceTree = "<group>"; };
 		CE4715002BBAC38F00759142 /* Lesson12HW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lesson12HW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4715032BBAC38F00759142 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE4715052BBAC38F00759142 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4715622BBC2D7700759142 /* PlaylistMoveDeleteViewController.swift */,
+				6C8BD2182BBDC19B0028E87B /* PlaylistMoveDeleteViewController+Table.swift */,
 				CE4715642BBC2D8000759142 /* PlaylistMoveDeleteModel.swift */,
 				CE4715662BBC2D8C00759142 /* PlaylistMoveDeleteView.swift */,
 			);
@@ -386,6 +389,7 @@
 				CE4715212BBADC7800759142 /* InitialViewController.swift in Sources */,
 				CE47155C2BBC26A300759142 /* PlaylistDeleteViewController.swift in Sources */,
 				CE4715732BBC31D000759142 /* PlaylistModesModel.swift in Sources */,
+				6C8BD2192BBDC19B0028E87B /* PlaylistMoveDeleteViewController+Table.swift in Sources */,
 				CE4715302BBAE14E00759142 /* UIViewController+Storyboard.swift in Sources */,
 				CE4715632BBC2D7700759142 /* PlaylistMoveDeleteViewController.swift in Sources */,
 				CE47153A2BBB074C00759142 /* DataLoaderService.swift in Sources */,

@@ -14,6 +14,8 @@ class MainPlaylistViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Task 1"
+        
         setupInitialState()
         model.loadData()
     }
