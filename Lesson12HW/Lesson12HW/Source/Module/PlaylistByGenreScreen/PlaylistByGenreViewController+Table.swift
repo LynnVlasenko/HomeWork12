@@ -55,7 +55,7 @@ extension PlaylistByGenreViewController: UITableViewDataSource {
         
         for (index, item) in model.sections.enumerated() {
             if index == indexPath.section {
-                for (i, d) in model.items.enumerated() {
+                for d in model.items {
                     if item == d.genre {
                         text.append("\(d.songTitle) / album: \(d.albumTitle)")
                         subtext.append("\(d.author) / genre: \(d.genre)")
