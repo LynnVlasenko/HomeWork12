@@ -17,29 +17,13 @@ extension PlaylistByGenreViewController: UITableViewDataSource {
     // titleForHeaderInSection
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        for (index, item) in model.sections.enumerated() {
-            if section == index {
-                return item
-            }
-        }
-        return "no name"
+        return model.sections[section].title
     }
     
     // numberOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var counter = 0
         
-        for (index, item) in model.sections.enumerated() {
-            if index == section {
-                for d in model.items {
-                    if item == d.genre {
-                        counter += 1
-                    }
-                }
-                
-            }
-        }
-        return counter
+        return model.sections[section].rows.count
     }
     
     // cellForRowAt
@@ -50,22 +34,9 @@ extension PlaylistByGenreViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        var text: [String] = []
-        var subtext: [String] = []
+        cell.textLabel?.text = "\(model.sections[indexPath.section].rows[indexPath.row].songTitle) / album: \(model.sections[indexPath.section].rows[indexPath.row].albumTitle)"
         
-        for (index, item) in model.sections.enumerated() {
-            if index == indexPath.section {
-                for d in model.items {
-                    if item == d.genre {
-                        text.append("\(d.songTitle) / album: \(d.albumTitle)")
-                        subtext.append("\(d.author) / genre: \(d.genre)")
-                    }
-                }
-            }
-        }
-        
-        cell.textLabel?.text = text[indexPath.row]
-        cell.detailTextLabel?.text = subtext[indexPath.row]
+        cell.detailTextLabel?.text = "\(model.sections[indexPath.section].rows[indexPath.row].author) / genre: \(model.sections[indexPath.section].rows[indexPath.row].genre)"
         
         return cell
     }

@@ -12,40 +12,50 @@ protocol PlaylistByGenreModelDelegate: AnyObject {
     func dataDidLoad()
 }
 
+class Section {
+    
+    var title: String
+    var rows: [Song]
+    
+    init(title: String, rows: [Song]) {
+        self.title = title
+        self.rows = rows
+    }
+}
+
 class PlaylistByGenreModel {
     
     weak var delegate: PlaylistByGenreModelDelegate?
     private let dataLoader = DataLoaderService()
     
-    var items: [Song] = []
-    var sections: [String] = []
+    var sections: [Section] = []
     
     func loadData() {
         
         dataLoader.loadPlaylist { playlist in
             
-            self.items = playlist?.songs ?? []
+            if let songs = playlist?.songs {
+                
+                // конвертуємо масив songs у Dictionary
+                // використовуючи grouping, де $0.genre - це ключ для елементів songs,
+                // у яких значення genre однакове
+                let groupedSongs = Dictionary(grouping: songs) { $0.genre }
+                
+                // конвертуємо словник у масив [Section] і задаємо:
+                // поле title - ключ
+                // поле rows - значення, для ключа (сгруповані пісні за ознакою genre)
+                let songSectoins: [Section] = groupedSongs.compactMap { key, value in
+                    return Section(title: key, rows: value)
+                }
+                
+                self.sections = songSectoins.sorted { $0.title < $1.title }
+            }
+            
             self.delegate?.dataDidLoad()
         }
-    }
-    
-    // create additional array for sections
-    func loadSections() {
-        
-        var genreInPlaylist: Set<String> = []
-        
-        for item in items {
-            genreInPlaylist.insert(item.genre)
-        }
-        
-        for item in genreInPlaylist {
-            sections.append(item)
-        }
-        sections = sections.sorted { $0 < $1 }
-        
-        self.delegate?.dataDidLoad()
         print(sections)
+        for i in sections {
+            print("title: \(i.title), rows:\(i.rows)")
+        }
     }
-    
-    
 }

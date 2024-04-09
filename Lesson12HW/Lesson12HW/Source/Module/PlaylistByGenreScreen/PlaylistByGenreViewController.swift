@@ -18,7 +18,6 @@ class PlaylistByGenreViewController: UIViewController {
         
         setupInitialState()
         model.loadData()
-        model.loadSections()
     }
     
     private func setupInitialState() {

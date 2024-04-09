@@ -15,9 +15,9 @@ extension PlaylistModesViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return model.genreSections.count
+            return model.sections[0].rows.count
         case 2:
-            return model.authorSections.count
+            return model.sections[1].rows.count
         default: return 0
         }
     }
@@ -29,13 +29,13 @@ extension PlaylistModesViewController: UITableViewDataSource {
         case 0:
             return "All songs"
         case 1:
-            for (index, item) in model.genreSections.enumerated() {
+            for (index, item) in model.sections[0].rows.enumerated() {
                 if section == index {
                     return item
                 }
             }
         case 2:
-            for (index, item) in model.authorSections.enumerated() {
+            for (index, item) in model.sections[1].rows.enumerated() {
                 if section == index {
                     return item
                 }
@@ -54,7 +54,7 @@ extension PlaylistModesViewController: UITableViewDataSource {
         case 0:
             return model.items.count
         case 1:
-            for (index, item) in model.genreSections.enumerated() {
+            for (index, item) in model.sections[0].rows.enumerated() {
                 if index == section {
                     for d in model.items {
                         if item == d.genre {
@@ -65,7 +65,7 @@ extension PlaylistModesViewController: UITableViewDataSource {
             }
             return counter
         case 2:
-            for (index, item) in model.authorSections.enumerated() {
+            for (index, item) in model.sections[1].rows.enumerated() {
                 if index == section {
                     for d in model.items {
                         if item == d.author {
@@ -95,7 +95,7 @@ extension PlaylistModesViewController: UITableViewDataSource {
             cell.textLabel?.text = "\(model.items[indexPath.row].songTitle) / album: \(model.items[indexPath.row].albumTitle)"
             cell.detailTextLabel?.text = "\(model.items[indexPath.row].author) / genre: \(model.items[indexPath.row].genre)"
         case 1:
-            for (index, item) in model.genreSections.enumerated() {
+            for (index, item) in model.sections[0].rows.enumerated() {
                 if index == indexPath.section {
                     for d in model.items {
                         if item == d.genre {
@@ -108,7 +108,7 @@ extension PlaylistModesViewController: UITableViewDataSource {
             cell.textLabel?.text = text[indexPath.row]
             cell.detailTextLabel?.text = subtext[indexPath.row]
         case 2:
-            for (index, item) in model.authorSections.enumerated() {
+            for (index, item) in model.sections[1].rows.enumerated() {
                 if index == indexPath.section {
                     for d in model.items {
                         if item == d.author {
