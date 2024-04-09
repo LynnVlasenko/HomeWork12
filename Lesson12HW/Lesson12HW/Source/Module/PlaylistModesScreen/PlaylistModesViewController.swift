@@ -17,7 +17,7 @@ class PlaylistModesViewController: UIViewController {
         title = "Task 5"
         
         setupInitialState()
-        setupData()
+        model.loadData()
     }
     
     private func setupInitialState() {
@@ -29,12 +29,6 @@ class PlaylistModesViewController: UIViewController {
         
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
-    }
-    
-    private func setupData() {
-        model.loadData()
-        model.loadGenreSections()
-        model.loadAuthorSections()
     }
 }
 

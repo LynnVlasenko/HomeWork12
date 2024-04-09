@@ -22,51 +22,47 @@ class PlaylistModesModel {
     private let dataLoader = DataLoaderService()
     
     var items: [Song] = []
-    var sections: [Sections] = [Sections(), Sections()]
-//    var genreSections: [String] = []
-//    var authorSections: [String] = []
+    var genreSections: [Section] = []
+    var authorSections: [Section] = []
     
     func loadData() {
         
         dataLoader.loadPlaylist { playlist in
-            
             self.items = playlist?.songs ?? []
-            self.delegate?.dataDidLoad()
+            
+            if let songs = playlist?.songs {
+                
+                // конвертуємо масив songs у Dictionary
+                // використовуючи grouping, де $0.genre - це ключ для елементів songs,
+                // у яких значення genre однакове
+                let groupedGenreSongs = Dictionary(grouping: songs) { $0.genre }
+                let groupedAuthorSongs = Dictionary(grouping: songs) { $0.author }
+                
+                // конвертуємо словник у масив [Section] і задаємо:
+                // поле title - ключ
+                // поле rows - значення, для ключа (сгруповані пісні за ознакою genre)
+                let songGenreSections: [Section] = groupedGenreSongs.compactMap { key, value in
+                    return Section(title: key, rows: value)
+                }
+                
+                let songAuthorSections: [Section] = groupedAuthorSongs.compactMap { key, value in
+                    return Section(title: key, rows: value)
+                }
+                
+                self.genreSections = songGenreSections.sorted { $0.title < $1.title }
+                self.authorSections = songAuthorSections.sorted { $0.title < $1.title }
+                
+                self.delegate?.dataDidLoad()
+            }
+            print("\n Genre: \(self.genreSections)")
+            for i in self.genreSections {
+                print("title: \(i.title), rows:\(i.rows)")
+            }
+            
+            print("\n Author: \(self.genreSections)")
+            for i in self.genreSections {
+                print("title: \(i.title), rows:\(i.rows)")
+            }
         }
-    }
-    
-    // create additional array for genre sections
-    func loadGenreSections() {
-        
-        var genreInPlaylist: Set<String> = []
-        
-        for item in items {
-            genreInPlaylist.insert(item.genre)
-        }
-        
-        for item in genreInPlaylist {
-            sections[0].rows.append(item)
-        }
-        sections[0].rows = sections[0].rows.sorted { $0 < $1 }
-        
-        self.delegate?.dataDidLoad()
-        print(sections[0].rows)
-    }
-    
-    func loadAuthorSections() {
-        
-        var genreInPlaylist: Set<String> = []
-        
-        for item in items {
-            genreInPlaylist.insert(item.author)
-        }
-        
-        for item in genreInPlaylist {
-            sections[1].rows.append(item)
-        }
-        sections[1].rows = sections[1].rows.sorted { $0 < $1 }
-        
-        self.delegate?.dataDidLoad()
-        print(sections[1].rows)
     }
 }

@@ -15,9 +15,9 @@ extension PlaylistModesViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return model.sections[0].rows.count
+            return model.genreSections.count
         case 2:
-            return model.sections[1].rows.count
+            return model.authorSections.count
         default: return 0
         }
     }
@@ -29,52 +29,23 @@ extension PlaylistModesViewController: UITableViewDataSource {
         case 0:
             return "All songs"
         case 1:
-            for (index, item) in model.sections[0].rows.enumerated() {
-                if section == index {
-                    return item
-                }
-            }
+            return model.genreSections[section].title
         case 2:
-            for (index, item) in model.sections[1].rows.enumerated() {
-                if section == index {
-                    return item
-                }
-            }
+            return model.authorSections[section].title
         default: return "no name"
         }
-        return "no name"
     }
     
     // numberOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var counter = 0
-        
         switch contentView.segmentControl.selectedSegmentIndex {
         case 0:
             return model.items.count
         case 1:
-            for (index, item) in model.sections[0].rows.enumerated() {
-                if index == section {
-                    for d in model.items {
-                        if item == d.genre {
-                            counter += 1
-                        }
-                    }
-                }
-            }
-            return counter
+            return model.genreSections[section].rows.count
         case 2:
-            for (index, item) in model.sections[1].rows.enumerated() {
-                if index == section {
-                    for d in model.items {
-                        if item == d.author {
-                            counter += 1
-                        }
-                    }
-                }
-            }
-            return counter
+            return model.authorSections[section].rows.count
         default: return model.items.count
         }
     }
@@ -87,39 +58,18 @@ extension PlaylistModesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        var text: [String] = []
-        var subtext: [String] = []
-        
         switch contentView.segmentControl.selectedSegmentIndex {
         case 0:
             cell.textLabel?.text = "\(model.items[indexPath.row].songTitle) / album: \(model.items[indexPath.row].albumTitle)"
             cell.detailTextLabel?.text = "\(model.items[indexPath.row].author) / genre: \(model.items[indexPath.row].genre)"
+        
         case 1:
-            for (index, item) in model.sections[0].rows.enumerated() {
-                if index == indexPath.section {
-                    for d in model.items {
-                        if item == d.genre {
-                            text.append("\(d.songTitle) / album: \(d.albumTitle)")
-                            subtext.append("\(d.author) / genre: \(d.genre)")
-                        }
-                    }
-                }
-            }
-            cell.textLabel?.text = text[indexPath.row]
-            cell.detailTextLabel?.text = subtext[indexPath.row]
+            cell.textLabel?.text = "\(model.genreSections[indexPath.section].rows[indexPath.row].songTitle) / album: \(model.genreSections[indexPath.section].rows[indexPath.row].albumTitle)"
+            cell.detailTextLabel?.text = "\(model.genreSections[indexPath.section].rows[indexPath.row].author) / genre: \(model.genreSections[indexPath.section].rows[indexPath.row].genre)"
+        
         case 2:
-            for (index, item) in model.sections[1].rows.enumerated() {
-                if index == indexPath.section {
-                    for d in model.items {
-                        if item == d.author {
-                            text.append("\(d.songTitle) / album: \(d.albumTitle)")
-                            subtext.append("\(d.author) / genre: \(d.genre)")
-                        }
-                    }
-                }
-            }
-            cell.textLabel?.text = text[indexPath.row]
-            cell.detailTextLabel?.text = subtext[indexPath.row]
+            cell.textLabel?.text = "\(model.authorSections[indexPath.section].rows[indexPath.row].songTitle) / album: \(model.authorSections[indexPath.section].rows[indexPath.row].albumTitle)"
+            cell.detailTextLabel?.text = "\(model.authorSections[indexPath.section].rows[indexPath.row].author) / genre: \(model.authorSections[indexPath.section].rows[indexPath.row].genre)"
         default: return cell
         }
         return cell
